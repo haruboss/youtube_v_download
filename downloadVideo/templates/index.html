@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home | Download Video
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container" style="position: absolute; left: 100px;">
+    <div class="container my-4" style="border:1px solid; background: black;">
+        <h1>YouTube Video Downloader</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="container">
+        <div class="mb-3">
+            <form action="{% url 'downloadVideo:download' %}" method="post">
+                {% csrf_token %}
+                <label for="exampleFormControlInput1" class="form-label"><b>Enter Video URL</b></label>
+                <input type="text" class="form-control" name="url" id="url_name" placeholder="YouTube video URL">
+                <br><br>
+                <button type="submit" class="form-control btn btn-danger" id="btn">Download</button>
+            </form>
+        </div>
+
+    </div>
+    <div class="container w-25">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Start Downloading</button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <p id="para_alert"></p>
+    </div>
+</div>
+
+{% endblock %}
+
+    
